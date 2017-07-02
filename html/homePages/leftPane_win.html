@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+		</style>
+	</head>
+	<body class="H-flexbox-vertical"style="background-color: #f4f5f9">
+		<header>
+			<div class="H-center-all H-padding-vertical-top-10">
+				<img src="../../image/logo.png" width="80" class="H-border-radius-circle H-display-block"/>
+			</div>
+			<div class="H-text-align-center H-margin-vertical-top-8 H-font-size-17 H-theme-font-color-555">
+				仇诺伊
+			</div>
+		</header>
+		<div id="main" class="H-flex-item H-overflow-auto"></div>
+		<footer class="H-text-align-center H-display-block H-padding-vertical-both-8">
+			<button class="H-width-avg-2 H-padding-vertical-both-10 H-border-none H-border-radius-5 H-theme-background-color1 H-theme-font-color-white H-font-size-16">
+				退出登录
+			</button>
+		</footer>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			var header = $api.dom('header');
+			$api.fixStatusBar(header);
+			var frmHeight = $api.byId('main').offsetHeight;
+			api.openFrame({
+				name : 'leftPane_frm',
+				url : 'leftPane_frm.html',
+				bounces : true,
+				rect : {
+					x : 0,
+					y : header.offsetHeight,
+					w : 'auto',
+					h : frmHeight
+				}
+			});
+		};
+	</script>
+</html>

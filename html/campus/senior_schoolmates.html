@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css" />
+		<style>
+			.parent {
+				width: 16vw;
+				height: 16vw;
+				border-radius: 50%;
+				background-color: #03A9F4;
+				position: absolute;
+			}
+			.parent ul, .parent ul li {
+				width: 0px;
+				height: 0px;
+				border-radius: 50%;
+				position: absolute;
+			}
+			.parent ul li {
+				left: 0;
+				top: 0;
+				transition: all 1.2s;
+				-webkit-transition: all 1.2s;
+			}
+			.parent ul li > span {
+				width: 12vw;
+				height: 12vw;
+				border-radius: 50%;
+				background-color: #5CB85C;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body class=""></body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			creat_cicle('学姐', ['盛佳', '汪慧', '张新梅', '马玉芬', '李梦丽', '吴静静'], 100, 53, 30);
+			creat_cicle('学长', ['王力宏', '井柏然', '邓超', '贾乃亮', '关杰', '薛之谦'], 360, 33, 0);
+			creat_cicle('500强', ['马云', '王健林', '罗永浩', '马化腾', '周鸿祎', '胡玮炜'], 620, 53, 0);
+			$api.css($api.dom('body'), 'height:780px');
+			setTimeout(function() {
+				var p = $api.domAll('.parent');
+				for (var i = 0; i < p.length; i++) {
+					show(p[i]);
+				}
+			}, 240)
+		};
+		function creat_cicle(parentText, menuArr, parentTop, parentLeft, ulRotate) {
+			var parent = document.createElement('div');
+			var ul = document.createElement('ul');
+			parent.className = 'parent H-center-all H-theme-font-color-white H-font-size-15';
+			ul.className = 'H-position-center-all';
+			parent.textContent = parentText;
+			parent.appendChild(ul);
+			document.body.appendChild(parent);
+			parent.style.top = parentTop + 'px';
+			parent.style.left = parentLeft + 'vw';
+			ul.style.transform = 'rotate(' + ulRotate + 'deg)';
+			for (var i = 0; i < 6; i++) {
+				var li = document.createElement('li');
+				var span = document.createElement('span');
+				li.style.visibility = 'hidden';
+				span.className = 'H-position-center-all H-center-all H-font-size-13';
+				span.textContent = menuArr[i];
+				li.appendChild(span);
+				ul.appendChild(li);
+				span.onclick=function(e){
+					var e=e||event;
+					e.cancelBubble=true;
+					openwin('schoolmates/schoolmates_win',$api.trim($api.text(this)))
+				}
+			}
+			parent.onclick = function() {
+				show(this);
+			}
+		}
+
+		function show(obj) {
+			var li = $api.domAll(obj, 'ul li');
+			var r = 28;
+			var t = Math.cos(Math.PI / 6) * r;
+			var half = r / 2;
+			var lefts = [-r, r, -half, half, -half, half];
+			var tops = [0, 0, -t, -t, t, t];
+			for (var i = 0; i < 6; i++) {
+				if (li[i].style.visibility == 'hidden') {
+					$api.css(li[i], 'visibility:visible;left:' + lefts[i] + 'vw;top:' + tops[i] + 'vw')
+				} else {
+					$api.css(li[i], 'visibility:hidden;left:0;top:0')
+				}
+			}
+		}
+	</script>
+</html>

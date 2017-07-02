@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+			.li-item {
+				width: 25vw;
+				height: 25vw;
+			}
+			.li-item > div {
+				width: 82%;
+				height: 82%;
+			}
+			#imgBox {
+				padding: 0 4px;
+				-moz-column-count: 2; /* Firefox */
+				-webkit-column-count: 2; /* Safari 和 Chrome */
+				column-count: 2;
+				-moz-column-gap: 4px; /* Firefox */
+				-webkit-column-gap: 4px; /* Safari 和 Chrome */
+				column-gap: 4px;
+			}
+			#imgBox img {
+				display: block;
+				margin-bottom: 1px;
+			}
+			.bigImg {
+				position: fixed;
+				top: 0;
+				left: 0;
+				background-color: rgba(0,0,0,0.6);
+				width: 100%;
+				height: 100%;
+				visibility: hidden;
+			}
+			.bigImg img {
+				width: 0;
+				display: block;
+				transform: scale(0,0);
+				-webkit-transform: scale(0,0);
+				-webkit-transition: all 600ms;
+				transition: all 600ms;
+			}
+			.disable-scrollBar {
+				height: 100%;
+				overflow: hidden;
+			}
+			.heart {
+				color: #f64760;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="H-flexbox-horizontal">
+			<li class="H-center-all li-item">
+				<div style="background-color: #9CCC65;" class="H-font-size-14 H-theme-font-color-white H-border-radius-circle H-center-all">
+					学院宗旨
+				</div>
+			</li>
+			<li class="H-center-all li-item">
+				<div style="background-color: #738FFE;" class="H-font-size-14 H-theme-font-color-white H-border-radius-circle H-center-all">
+					教学通知
+				</div>
+			</li>
+			<li class="H-center-all li-item">
+				<div style="background-color: #7E57C2;" class="H-font-size-14 H-theme-font-color-white H-border-radius-circle H-center-all">
+					近期活动
+				</div>
+			</li>
+			<li class="H-center-all li-item">
+				<div style="background-color: #29B6F6;" class="H-font-size-14 H-theme-font-color-white H-border-radius-circle H-center-all">
+					更多
+				</div>
+			</li>
+		</ul>
+		<div id="imgBox"></div>
+		<div class="bigImg H-center-all" onclick="restore()">
+			<img/>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			show_imgs()
+		};
+		//		渲染图片列表
+		function show_imgs() {
+			var imgList = '';
+			for (var i = 0; i < 28; i++) {
+				imgList += '<div class="H-position-relative"><i onclick="like(this)" style="position:absolute;right:0;bottom:-4px;padding:0 7px" class="H-iconfont H-icon-like H-font-size-28 H-theme-font-color-ccc"></i><img onclick="scale(this)" width="100%" src="../../image/campus/scenery/' + i + '-campus.jpg"></div>';
+			}
+			$api.html($api.byId('imgBox'), imgList);
+		}
+
+		//		放大显示图片
+		function scale(ele) {
+			$api.addCls($api.dom('html'), 'disable-scrollBar');
+			$api.addCls($api.dom('body'), 'disable-scrollBar');
+			var bigImg = $api.dom('.bigImg');
+			var img = $api.dom(bigImg, 'img');
+			$api.css(bigImg, 'visibility:visible');
+			$api.attr(img, 'src', $api.attr(ele, 'src'));
+			$api.css(img, 'width:94%;-webkit-transform: scale(1,1);');
+		}
+
+		//		隐藏图片
+		function restore() {
+			$api.removeCls($api.dom('html'), 'disable-scrollBar');
+			$api.removeCls($api.dom('body'), 'disable-scrollBar');
+			var bigImg = $api.dom('.bigImg');
+			var img = $api.dom(bigImg, 'img');
+			$api.css(img, 'width:0;transform: scale(1,1);-webkit-transform: scale(0,0);');
+			$api.css(bigImg, 'visibility:hidden');
+		}
+
+		//		我喜欢
+		function like(obj) {
+			if ($api.hasCls(obj, 'heart')) {
+				$api.removeCls(obj, 'heart');
+			} else {
+				$api.addCls(obj, 'heart');
+			}
+		}
+	</script>
+</html>

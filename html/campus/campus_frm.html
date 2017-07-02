@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+			.triangle {
+				position: absolute;
+				left: -5px;
+				top: 15px;
+				width: 0;
+				height: 0;
+				border: 6px solid #F4F5F9;
+				box-shadow: -1px -1px 0 #999;
+				transform: rotate(-45deg);
+				-webkit-transform: rotate(-45deg);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="H-flexbox-horizontal H-padding-horizontal-both-8 H-margin-vertical-bottom-10">
+			<div class="" style="">
+				<img src="../../image/campus/askme.png" height="140"/>
+			</div>
+			<div class="H-flex-item H-padding-horizontal-both-5 H-theme-border-color-999 H-border-radius-5 H-font-size-14 H-position-relative" style="margin: 75px 0 0 -25px;letter-spacing: 0.5px">
+				<div class="triangle"></div>
+				<div class="H-height-200 H-flexbox-vertical">
+					<strong class="H-font-size-15"> 学院简介： </strong>
+					<div class="H-flex-item H-text-indent H-overflow-y-auto">
+						电子通信工程学院目前设有电子系、通信系、自动化系及工业工程系共四个系，开设有电子信息工程、通信工程、自动化、电子科学与技术、测控技术与仪器、物联网工程、机械设计制造及其自动化、汽车服务工程及电气工程及自动化9个本科专业以及机电一体化技术、汽车检测与维修技术2个专科专业。
+						学院拥有1个国家级大学生校外实践教育基地、3个省级示范实验实训中心、27个现代化实验室、18个校企合作基地。学院通过校企合作共建专业、共建实习实训基地、合作就业等不同形式开展产学研合作教育，经过多年探索，学院开创了“教学—实践—就业零距离，实习—实训—就业一体化”的应用型人才培养模式，并获批省级教学成果三等奖。
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul class="H-flexbox-horizontal H-text-align-center H-padding-vertical-both-10">
+			<li class="H-flex-item college-item">
+				<span class="H-icon H-center-all H-border-radius-circle H-margin-horizontal-auto" style="height: 60px; width: 60px; background-color: #26C6DA"><i class="H-iconfont H-icon-fangzi H-font-size-22 H-theme-font-color-white"></i></span>
+				<label class="H-display-block H-font-size-13 H-margin-vertical-top-7">学院风采</label>
+			</li>
+			<li class="H-flex-item college-item">
+				<span class="H-icon H-center-all H-border-radius-circle H-margin-horizontal-auto" style="height: 60px; width: 60px;background-color: #738FFE"><i class="H-iconfont H-icon-tearch H-font-size-22 H-theme-font-color-white"></i></span>
+				<label class="H-display-block H-font-size-13 H-margin-vertical-top-7">师资力量</label>
+			</li>
+			<li class="H-flex-item college-item">
+				<span class="H-icon H-center-all H-border-radius-circle H-margin-horizontal-auto" style="height: 60px; width: 60px;background-color: #2BAF2B"><i class="H-iconfont H-icon-close-eye H-font-size-22 H-theme-font-color-white"></i></span>
+				<label class="H-display-block H-font-size-13 H-margin-vertical-top-7">学长学姐</label>
+			</li>
+		</ul>
+		<ul class="H-flexbox-horizontal H-text-align-center H-padding-vertical-both-10">
+			<li class="H-flex-item college-item">
+				<span class="H-icon H-center-all H-border-radius-circle H-margin-horizontal-auto" style="height: 60px; width: 60px;background-color: #26A69A"><i class="H-iconfont H-icon-taideng H-font-size-22 H-theme-font-color-white"></i></span>
+				<label class="H-display-block H-font-size-13 H-margin-vertical-top-7">专业解读</label>
+			</li>
+			<li class="H-flex-item college-item">
+				<span class="H-icon H-center-all H-border-radius-circle H-margin-horizontal-auto" style="height: 60px; width: 60px;background-color: #FF6091"><i class="H-iconfont H-icon-familyarea H-font-size-22 H-theme-font-color-white"></i></span>
+				<label class="H-display-block H-font-size-13 H-margin-vertical-top-7">赛事作品</label>
+			</li>
+			<li class="H-flex-item college-item">
+				<span class="H-icon H-center-all H-border-radius-circle H-margin-horizontal-auto" style="height: 60px; width: 60px;background-color: #FFB126"><i class="H-iconfont H-icon-find-null H-font-size-22 H-theme-font-color-white"></i></span>
+				<label class="H-display-block H-font-size-13 H-margin-vertical-top-7">就业前景</label>
+			</li>
+		</ul>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/public.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+		};
+		//打开该学院各项简介页
+		bind_clickEvent('college-item','label','../campus/college_win');
+	</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+			.yellow {
+				color: #ffa801
+			}
+		</style>
+	</head>
+	<body>
+		<header id="header" class="H-header H-theme-background-color1 H-theme-font-color-white H-border-vertical-bottom-after">
+			<span tapmode="" onclick="api.closeWin()" class="H-icon H-width-30 H-position-relative H-display-inline-block H-float-left H-vertical-middle H-padding-horizontal-left-15 H-z-index-100"><i class="H-iconfont H-icon-arrow-left H-font-size-16 H-vertical-middle"></i></span>
+			<div class="H-header-title H-center-all H-font-size-18 H-position-absolute H-width-100-percent">
+				新闻详情
+			</div>
+			<!--<span onclick="share_news()" class="H-icon H-position-relative H-display-inline-block H-float-right H-vertical-middle H-padding-horizontal-right-12 H-z-index-100"><i class="H-iconfont H-icon-share H-font-size-18 H-vertical-middle"></i></span>
+			<span id="collection" class="H-icon H-position-relative H-display-inline-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-right-15 H-z-index-100"><i class="H-iconfont H-icon-star H-font-size-18 H-vertical-middle"></i></span>-->
+		</header>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/collect.js"></script>
+	<script type="text/javascript">
+		var newsid, sta;
+		apiready = function() {
+			var header = $api.byId('header');
+			$api.fixStatusBar(header);
+			newsid = api.pageParam.data;
+			api.openFrame({
+				name : 'news_frm',
+				url : 'news_frm.html',
+				rect : {
+					x : 0,
+					y : $api.dom('header').offsetHeight,
+					w : 'auto',
+					h : 'auto'
+				},
+				pageParam : {
+					id : newsid
+				}
+			});
+//			check_Collection(newsid, 1);
+		};
+		//		点击收藏或取消
+//		var collect = $api.byId('collection');
+//		collect.onclick = function() {
+//			click_Collection(newsid, 1, sta)
+//		}
+//		function share_news() {
+//			api.execScript({
+//				frameName : 'news_frm',
+//				script : 'open_share()'
+//			});
+//		}
+	</script>
+</html>

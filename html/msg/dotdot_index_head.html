@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+	</head>
+	<body>
+		<header class="H-header H-theme-background-color-fefefe H-theme-font-color-333" id="header">
+			<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-position-absolute H-width-100-percent">
+				资讯大厅
+			</div>
+		</header>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			var header = $api.byId('header');
+			$api.fixStatusBar(header);
+			var headerPos = $api.offset(header);
+			api.openFrame({
+				name : 'dotdot_index_body',
+				url : 'dotdot_index_body.html',
+				rect : {
+					x : 0,
+					y : headerPos.h,
+					w : 'auto',
+					h : 'auto'
+				}
+			});
+		}
+	</script>
+</html>

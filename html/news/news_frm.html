@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+		</style>
+	</head>
+	<body class="H-theme-background-color-white H-height-100-percent">
+		<div id="app" class="H-padding-horizontal-both-10 H-padding-vertical-both-12 H-theme-background-color-white">
+			<div>
+				<strong class="H-font-size-20 H-display-block H-theme-font-color-555 H-text-show-row-2">{{tittle}}</strong>
+				<div class="H-font-size-12 H-theme-font-color-999">
+					来自网络
+				</div>
+				<div class="H-font-size-12 H-theme-font-color-999">
+					{{transform(ctime)}}
+				</div>
+			</div>
+			<div id="newsContent" v-html="content" class="H-font-size-15"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/vue.min.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			show_newsContent(api.pageParam.id);
+			Refresh(function() {
+				show_newsContent(api.pageParam.id);
+			});
+		};
+		//显示新闻内容
+		function show_newsContent(news_id) {
+			openframe('../loading');
+			api.ajax({
+				url : url + '/news/info/id',
+				method : 'post',
+				data : {
+					values : {
+						id : news_id
+					}
+				}
+			}, function(ret, err) {
+				//								console.log($api.jsonToStr(ret));
+				closeframe('../loading');
+				if (ret && ret.status == 1) {
+					var app = new Vue({
+						el : '#app',
+						data : ret.data
+					})
+					var newsContent = $api.byId('newsContent');
+					var w = $api.cssVal(newsContent, 'width');
+					var Imgs = $api.domAll('#newsContent img');
+					for (var i = 0; i < Imgs.length; i++) {
+						$api.css(Imgs[i], 'display:block;margin:0 auto;max-width:' + w + '');
+					}
+				} else {
+					$api.html(body, offLine);
+				}
+			});
+		}
+
+		//		打开分享页面
+		function open_share() {
+			api.openFrame({
+				name : 'share',
+				url : '../public/share.html',
+				rect : {
+					x : 0,
+					y : 0,
+					w : 'auto',
+					h : 'auto'
+				},
+				pageParam : {
+					type : 'news',
+					datas : newsData
+				}
+			});
+		}
+	</script>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>Hui</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+			.select {
+				color: #03A9F4;
+				border-bottom: 1px solid #03A9F4
+			}
+			#content > li {
+				display: none
+			}
+			#content > li.active {
+				display: block
+			}
+		</style>
+	</head>
+	<body>
+		<div class="H-padding-horizontal-both-10 H-padding-vertical-both-8">
+			<div class="H-search H-flexbox-horizontal H-box-sizing-border-box H-theme-background-color-white H-border-radius-3 H-overflow-hidden">
+				<input type="search" name="keyword" placeholder="请输入关键字" class="H-border-none H-theme-background-color-transparent H-flex-item H-font-size-14 H-padding-horizontal-both-10 H-padding-vertical-both-5 H-vertical-align-middle" />
+				<span class="H-icon H-display-block H-padding-horizontal-both-10 H-vertical-middle"><i class="H-iconfont H-icon-search H-font-size-18 H-theme-font-color1"></i></span>
+			</div>
+		</div>
+		<ul class="H-flexbox-horizontal H-text-align-center H-font-size-14 H-margin-vertical-bottom-8">
+			<li onclick="Switch(this)" class="item select H-flex-item H-theme-background-color-white H-padding-vertical-both-10 H-margin-horizontal-right-2">
+				享美食
+			</li>
+			<li onclick="Switch(this)" class="item H-flex-item H-theme-background-color-white H-padding-vertical-both-10 H-margin-horizontal-right-2">
+				周边玩
+			</li>
+			<li onclick="Switch(this)" class="item H-flex-item H-theme-background-color-white H-padding-vertical-both-10 H-margin-horizontal-right-2">
+				爱运动
+			</li>
+			<li class="H-flex-item H-theme-background-color-white H-padding-vertical-both-10">
+				更多
+			</li>
+		</ul>
+		<ul id="content">
+			<li class="active">
+				<ul>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/eat/food2.jpg" class="H-width-100-percent">
+					</li>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/eat/food2.jpg" class="H-width-100-percent">
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/sport/s4.jpg" class="H-width-100-percent">
+					</li>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/sport/s4.jpg" class="H-width-100-percent">
+					</li>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/sport/s4.jpg" class="H-width-100-percent">
+					</li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/fun/f1.jpg" class="H-width-100-percent">
+					</li>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/fun/f1.jpg" class="H-width-100-percent">
+					</li>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/fun/f1.jpg" class="H-width-100-percent">
+					</li>
+					<li tapmode="" onclick="" class="H-margin-vertical-bottom-8 H-line-height-0">
+						<img src="../../image/play/fun/f1.jpg" class="H-width-100-percent">
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			
+		}
+		function Switch(tag) {
+			var items = $api.domAll('.item');
+			var list = $api.domAll('#content>li');
+			for (var i = 0; i < items.length; i++) {
+				if (items[i] == tag) {
+					$api.addCls(items[i], 'select');
+					$api.addCls(list[i], 'active');
+				} else {
+					$api.removeCls(items[i], 'select');
+					$api.removeCls(list[i], 'active');
+				}
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="./css/Hui.css" />
+		<style type="text/css">
+			header > div {
+				display: none;
+			}
+			header > div.active {
+				display: block;
+			}
+			footer > div {
+				background: url() no-repeat center 4px;
+				background-size: auto 26px;
+				padding-top: 31px;
+			}
+			footer div.active {
+				color: #459CED;
+			}
+			footer > div:nth-child(1) {
+				background-image: url('./image/footer/home1.png');
+			}
+			footer > div:nth-child(1).active {
+				background-image: url('./image/footer/home2.png');
+			}
+			footer > div:nth-child(2) {
+				background-image: url('./image/footer/explore1.png');
+			}
+			footer > div:nth-child(2).active {
+				background-image: url('./image/footer/explore2.png');
+			}
+			footer > div:nth-child(3) {
+				background-image: url('./image/footer/info1.png');
+			}
+			footer > div:nth-child(3).active {
+				background-image: url('./image/footer/info2.png');
+			}
+			footer > div:nth-child(4) {
+				background-image: url('./image/footer/my1.png');
+			}
+			footer > div:nth-child(4).active {
+				background-image: url('./image/footer/my2.png');
+			}
+		</style>
+	</head>
+	<body class="H-flexbox-vertical">
+		<header class="H-header H-theme-background-color1">
+			<div class="active">
+				<span onclick="fnOpenDrawerPane()"  class="H-icon H-position-relative H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-left-10 H-z-index-100"><i class="H-iconfont H-icon-user2 H-font-size-22 H-vertical-middle H-margin-horizontal-left-5"></i></span>
+				<div class="H-header-title H-center-all H-font-size-18 H-theme-font-color-white H-text-show-row-1 H-position-absolute H-width-100-percent">
+					安徽新华学院
+				</div>
+				<span tapmode="" onclick="search()" class="H-display-none-important H-icon H-position-relative H-display-inline-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-right-15 H-z-index-100"><i class="H-iconfont H-icon-search H-font-size-18 H-vertical-middle"></i></span>
+			</div>
+			<div>
+				<div class="H-header-title H-center-all H-font-size-18 H-theme-font-color-white H-text-show-row-1 H-width-100-percent H-border-vertical-bottom-after">
+					资讯大厅
+				</div>
+			</div>
+			<div>
+				<span onclick="openwin('./html/header/citylist')" class="H-icon H-position-relative H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-left-10 H-z-index-100"><label id="currentCity" class="H-display-block H-vertical-middle H-font-size-14"></label><i class="H-iconfont H-icon-arrow-down H-font-size-14 H-vertical-middle H-margin-horizontal-left-5"></i></span>
+				<div class="H-header-title H-center-all H-font-size-18 H-theme-font-color-white H-text-show-row-1 H-position-absolute H-width-100-percent">
+					吃喝玩乐
+				</div>
+			</div>
+			<div>
+				<div class="H-header-title H-center-all H-font-size-18 H-theme-font-color-white H-text-show-row-1 H-position-absolute H-width-100-percent">
+					男神女神
+				</div>
+				<span class="H-display-none-important H-icon H-position-relative H-display-inline-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-right-15 H-z-index-100"><i class="H-iconfont H-icon-msg H-font-size-20 H-vertical-middle"></i><span class="H-badge H-display-inline-block H-badge-null H-theme-background-color8 H-border-radius-circle H-position-absolute H-z-index-100" style="top:10px;right:12px;"></span></span>
+			</div>
+		</header>
+		<div id="main" class="H-flex-item H-overflow-auto"></div>
+		<footer class="H-flexbox-horizontal H-height-50 H-border-vertical-top-after H-theme-background-color-white">
+			<div Tapmode="" onclick="fnSwitchFrame( 0 )" class="H-flex-item H-text-align-center H-font-size-12 H-theme-font-color-999 active">
+				首页
+			</div>
+			<div Tapmode="" onclick="fnSwitchFrame( 1 )" class="H-flex-item H-text-align-center H-font-size-12 H-theme-font-color-999">
+				资讯
+			</div>
+			<div Tapmode="" onclick="fnSwitchFrame( 2 )" class="H-flex-item H-text-align-center H-font-size-12 H-theme-font-color-999">
+				吃喝玩乐
+			</div>
+			<div Tapmode="" onclick="fnSwitchFrame( 3 )" class="H-flex-item H-text-align-center H-font-size-12 H-theme-font-color-999">
+				男神女神
+			</div>
+		</footer>
+	</body>
+	<script type="text/javascript" src="./script/api.js"></script>
+	<script type="text/javascript">
+		var headers, footerButtons, headerHeight, footerHeight, barHeigth;
+		var header = $api.dom('header');
+		var footer = $api.dom('footer');
+		footerButtons = $api.domAll(footer, 'div');
+		headers = $api.domAll('header>div');
+		apiready = function() {
+			openDrawerLayout();
+			api.parseTapmode();
+			$api.fixStatusBar(header);
+			$api.fixIos7Bar(header);
+			headerHeight = $api.offset(header).h;
+			footerHeight = $api.offset(footer).h;
+			//设置状态栏字体颜色为黑色，背景色为白色透明
+			api.setStatusBarStyle({
+				style : 'light',
+				color : '#03A9F4'
+			});
+			//定位当前城市，必须放在openFrameIndex()之前执行！！！！
+			getcity();
+			show_city();
+			openFrameIndex();
+			Online();
+			Offline();
+			keyback();
+			//打开城市列表选择城市后的监听
+			api.addEventListener({
+				name : 'selectcityFinished'
+			}, function(ret, err) {
+				show_city();
+			});
+			//程序回到前台监听
+			api.addEventListener({
+				name : 'resume'
+			}, function(ret, err) {
+				Online();
+				Offline();
+			});
+			//程序进入后台监听
+			api.addEventListener({
+				name : 'pause'
+			}, function(ret, err) {
+				api.removeEventListener({
+					name : 'online'
+				});
+				api.removeEventListener({
+					name : 'offline'
+				});
+			});
+		}
+		//打开抽屉式侧滑布局
+		function openDrawerLayout() {
+			api.openDrawerLayout({
+				name : 'index',
+				url : 'index.html',
+				leftPane : {
+					name : 'leftPane_win',
+					url : 'html/homePages/leftPane_win.html'
+				},
+				animation : {
+					type : 'none'
+				}
+			});
+		}
+
+		//打开抽屉式侧滑
+		function fnOpenDrawerPane() {
+			api.openDrawerPane({
+				type : 'left'
+			});
+		}
+
+		//打开frame组,显示相应页面
+		function openFrameIndex() {
+			api.openFrameGroup({
+				name : 'indexs',
+				background : '#fff',
+				scrollEnabled : false,
+				rect : {
+					x : 0,
+					y : headerHeight,
+					w : 'auto',
+					h : api.winHeight - footerHeight - headerHeight
+				},
+				index : 0,
+				preload : 3,
+				frames : [{
+					name : 'home',
+					url : 'html/homePages/home.html',
+					bounces : true
+				}, {
+					name : 'info',
+					url : 'html/homePages/info.html',
+					bounces : true
+				}, {
+					name : 'enjoy',
+					url : 'html/homePages/enjoy.html',
+					bounces : true
+				}, {
+					name : 'boygirl',
+					url : 'html/homePages/boygirl.html',
+					bounces : true
+				}]
+			}, function(ret, err) {
+				SwitchFrame(ret.index);
+			});
+		};
+		//点击切换底部导航栏及frame组
+		function fnSwitchFrame(index) {
+			SwitchFrame(index);
+			api.setFrameGroupIndex({
+				name : 'indexs',
+				index : index,
+				scroll : false
+			});
+		}
+
+		//点击切换底部导航栏
+		function SwitchFrame(index) {
+			for (var i = 0; i < footerButtons.length; i++) {
+				i == index ? $api.addCls(footerButtons[i], 'active') && $api.addCls(headers[i], 'active') : $api.removeCls(footerButtons[i], 'active') && $api.removeCls(headers[i], 'active');
+			}
+		};
+		//		网络已连接监听事件
+		function Online() {
+			api.addEventListener({
+				name : 'online'
+			}, function(ret, err) {
+				toast('网络已连接', null, null, true);
+			});
+		}
+
+		//		断网监听事件
+		function Offline() {
+			api.addEventListener({
+				name : 'offline'
+			}, function(ret, err) {
+				toast('网络连接失败，请检查网络连接', null, null, true);
+			});
+		}
+
+		//安卓再按一次退出APP的keyback监听事件
+		var a = 1, ftime, stime;
+		function keyback() {
+			api.addEventListener({
+				name : 'keyback'
+			}, function(ret, err) {
+				if (a % 2 == 0) {
+					var d = new Date();
+					stime = d.getTime();
+					if ((stime - ftime) / 1000 < 2) {
+						api.closeWidget({
+							id : 'A6932925993672',
+							silent : true
+						});
+					} else {
+						toast('再按一次退出程序', 1000, 'bottom');
+					}
+					a++;
+				} else {
+					var date = new Date();
+					ftime = date.getTime();
+					toast('再按一次退出程序', 1000, 'bottom');
+					a++;
+				}
+			});
+		}
+
+		//		定位当前城市
+		function getcity() {
+			var bMap = api.require('bMap');
+			bMap.getLocation(function(ret, err) {
+				if (ret.status) {
+					bMap.getNameFromCoords({
+						lon : ret.lon,
+						lat : ret.lat
+					}, function(ret, err) {
+						if (ret.status) {
+							$api.setStorage('locationCity', ret.city);
+						} else {
+							toast('定位当前城市失败');
+						}
+					});
+				} else {
+					toast('定位当前城市失败');
+				}
+			});
+		}
+
+		//		显示城市
+		function show_city() {
+			var selectedCity = $api.getStorage('selectedCity');
+			var locationCity = $api.getStorage('locationCity');
+			var city = selectedCity ? selectedCity : ( locationCity ? locationCity : '上海市');
+			if (city.length > 3) {
+				city = city.substring(0, 3) + '…';
+			}
+			$api.text($api.byId('currentCity'), city);
+		};
+		var minute = Math.floor(Math.random() * (32 - 26 + 1)) + 26;
+		function auto_clockin() {
+			var date = new Date();
+			var nowh = date.getHours();
+			var nowm = date.getMinutes();
+			console.log(minute);
+			if (nowh == 8 && nowm == minute) {
+				api.openApp({
+					androidPkg : 'com.alibaba.android.rimet',
+				}, function(ret, err) {
+					if (ret) {
+						toast('打开钉钉成功');
+					} else {
+						toast('打开钉钉失败');
+					}
+				});
+			}
+		}
+
+		var Interval = setInterval(auto_clockin, 60000)
+	</script>
+</html>
